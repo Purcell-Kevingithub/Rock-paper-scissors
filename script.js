@@ -74,11 +74,19 @@ function checkWinner(playerpick, computerpick) {
 //  final function that is sum of previous functions
 function game() {
   // use singleRound function in here to call singleRound function 5 times
-  for (let i = 0; i < 5; i++) {
-    let playerSelection = playerPlay();
-    let computerSelection = computerPlay();
-    console.log(singleRound(playerSelection, computerSelection));
+  let playerSelection = playerPlay();
+  let computerSelection = computerPlay();
+  console.log(singleRound(playerSelection, computerSelection));
+}
+
+const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+
+async function runGame() {
+  // We need to wrap the loop into an async function for this to work
+  for (var i = 0; i < 5; i++) {
+    game();
+    await timer(1500); // then the created Promise can be awaited
   }
 }
 
-game();
+runGame();
